@@ -8,8 +8,8 @@ import { Analytics } from '@vercel/analytics/react';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Foodie find',
-  description: 'Meet with foodies in your city',
+  title: 'Conerts R US',
+  description: 'Europes Leading ECommerce Provider',
 }
 
 export default function RootLayout({
@@ -23,6 +23,7 @@ export default function RootLayout({
         <Header/>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
