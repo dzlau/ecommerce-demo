@@ -29,6 +29,7 @@ export const ProductTable = pgTable(
 );
 
 export const getProducts= async () => {
+  await new Promise((resolve) => setTimeout(resolve,6000))
   const db = drizzle(sql);
   const selectResult = await db.select().from(ProductTable);
   return selectResult
@@ -36,7 +37,6 @@ export const getProducts= async () => {
 
 
 export const getProduct = async(productID : number) =>{
-await new Promise((resolve) => setTimeout(resolve,8000))
 const db = drizzle(sql)
 const product = await db.select().from(ProductTable).where(eq(ProductTable.id, productID))
 return product[0]
