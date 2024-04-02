@@ -5,6 +5,8 @@ import heroImg from '@/public/hero.jpg'
 import { getHeroContent } from '@/lib/contentful'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import ShoppingGrid from "@/components/ShoppingGrid";
+import { getProducts } from "@/lib/products";
 
 async function GetContentful(){
   const heroContent = await getHeroContent()
@@ -12,6 +14,10 @@ async function GetContentful(){
 }
 
 export  default async function Home() {
+  async function Products() {
+    const products = await getProducts();
+    return <ShoppingGrid products={products} />;
+  }
   return (
     <>
     <main className="flex min-h-screen flex-col items-center justify-between bg-stone-100 bg-[url('/hero.jpg')] bg-cover bg-top bg-no-repeat h-10">
@@ -30,11 +36,12 @@ export  default async function Home() {
             </p>
             </Suspense>
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row justify-start">
-              <Link
+              {/* <Link
                 href="/products"
                 className="px-8 py-4 text-md font-medium text-center text-white bg-teal-600 rounded-md " >
                 Shop for gear!
-              </Link>
+              </Link> */}
+              <Products/>
             </div>
           </div>
         </div>
