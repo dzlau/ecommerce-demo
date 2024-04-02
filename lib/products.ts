@@ -36,7 +36,7 @@ export const getProducts= async () => {
 
 
 export const getProduct = async(productID : number) =>{
-await new Promise((resolve) => setTimeout(resolve,2000))
+await new Promise((resolve) => setTimeout(resolve,8000))
 const db = drizzle(sql)
 const product = await db.select().from(ProductTable).where(eq(ProductTable.id, productID))
 return product[0]
