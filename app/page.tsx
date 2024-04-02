@@ -5,13 +5,18 @@ import heroImg from '@/public/hero.jpg'
 import { getHeroContent } from '@/lib/contentful'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
-
+import { getProducts } from "@/lib/products";
+import ShoppingGrid from "@/components/ShoppingGrid";
 async function GetContentful(){
   const heroContent = await getHeroContent()
   return <span className="text-shadow">{heroContent}</span>
 }
 
 export  default async function Home() {
+  async function Products() {
+    const products = await getProducts();
+    return <ShoppingGrid products={products} />;
+  }
   return (
     <>
     <main className="flex min-h-screen flex-col items-center justify-between bg-stone-100 bg-[url('/hero.jpg')] bg-cover bg-top bg-no-repeat h-10">
@@ -35,6 +40,7 @@ export  default async function Home() {
                 className="px-8 py-4 text-md font-medium text-center text-white bg-teal-600 rounded-md " >
                 Shop for gear!
               </Link>
+              <Products />
             </div>
           </div>
         </div>
