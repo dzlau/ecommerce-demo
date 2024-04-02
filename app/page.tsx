@@ -35,11 +35,11 @@ export  default async function Home() {
             </p>
             </Suspense>
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row justify-start">
-              <Link
+              {/* <Link
                 href="/products"
                 className="px-8 py-4 text-md font-medium text-center text-white bg-teal-600 rounded-md " >
                 Shop for gear!
-              </Link>
+              </Link> */}
               <Products />
             </div>
           </div>
