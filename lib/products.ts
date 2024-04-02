@@ -29,6 +29,7 @@ export const ProductTable = pgTable(
 );
 
 export const getProducts= async () => {
+  await new Promise((resolve) => setTimeout(resolve,6000))
   const db = drizzle(sql);
   const selectResult = await db.select().from(ProductTable);
   return selectResult
