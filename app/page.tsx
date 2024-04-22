@@ -5,6 +5,8 @@ import heroImg from '@/public/hero.jpg'
 import { getHeroContent } from '@/lib/contentful'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import ShoppingGrid from "@/components/ShoppingGrid";
+import { getProducts } from "@/lib/products";
 
 async function GetContentful(){
   const heroContent = await getHeroContent()
@@ -12,6 +14,10 @@ async function GetContentful(){
 }
 
 export  default async function Home() {
+  async function Products() {
+    const products = await getProducts();
+    return <ShoppingGrid products={products} />;
+  }
   return (
     <>
     <main className="flex min-h-screen flex-col items-center justify-between bg-stone-100 bg-[url('/hero.jpg')] bg-cover bg-top bg-no-repeat h-10">
@@ -24,17 +30,25 @@ export  default async function Home() {
             <h1 className="text-4xl w-max font-bold leading-snug tracking-tight text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight ">
               Concerts R Us
             </h1>
-            <Suspense fallback={<Skeleton className=" w-[400px] h-[20px] my-5   bg-slate-100"  />} >
-            <p className="py-5 text-xl leading-normal text-white lg:text-xl xl:text-2xl ">
-              <GetContentful />
-            </p>
-            </Suspense>
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row justify-start">
               <Link
                 href="/products"
                 className="px-8 py-4 text-md font-medium text-center text-white bg-teal-600 rounded-md " >
                 Shop for gear!
               </Link>
+            </div>
+            <Suspense fallback={<Skeleton className=" w-[400px] h-[20px] my-5   bg-slate-100"  />} >
+            <p className="py-5 text-xl leading-normal text-white lg:text-xl xl:text-2xl ">
+              <GetContentful />
+            </p>
+            </Suspense>
+            <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row justify-start">
+              {/* <Link
+                href="/products"
+                className="px-8 py-4 text-md font-medium text-center text-white bg-teal-600 rounded-md " >
+                Shop for gear!
+              </Link> */}
+              <Products/>
             </div>
           </div>
         </div>
