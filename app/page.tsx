@@ -30,6 +30,13 @@ export  default async function Home() {
             <h1 className="text-4xl w-max font-bold leading-snug tracking-tight text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight ">
               Concerts R Us
             </h1>
+            <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row justify-start">
+              <Link
+                href="/products"
+                className="px-8 py-4 text-md font-medium text-center text-white bg-teal-600 rounded-md " >
+                Shop for gear!
+              </Link>
+            </div>
             <Suspense fallback={<Skeleton className=" w-[400px] h-[20px] my-5   bg-slate-100"  />} >
             <p className="py-5 text-xl leading-normal text-white lg:text-xl xl:text-2xl ">
               <GetContentful />
