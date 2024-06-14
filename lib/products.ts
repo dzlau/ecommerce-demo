@@ -9,8 +9,10 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/pg-core';
 import { eq } from 'drizzle-orm';
-
-
+import { SanityDocument } from "next-sanity"
+import { sanityFetch, PRODUCT_QUERY, SANITY_IMAGE_URL } from "@/lib/sanity"
+import { Product } from './types';
+import { groq } from "next-sanity";
 // Create a pgTable that maps to a table in your DB
 export const ProductTable = pgTable(
   'products',
@@ -27,6 +29,37 @@ export const ProductTable = pgTable(
     };
   },
 );
+
+export const getProductsSanity = async () => {
+  const data = await sanityFetch<SanityDocument[]>({
+    query: PRODUCT_QUERY,
+  })
+  const products = data.map((product: any) => { return { id: product._id, name: product.productName, imageurl: product.imageUrl, description: product.description, cost: product.price } })
+  return products
+};
+
+export const getProductSanity = async (productID: number) => {
+  const query = groq`*[_type == "product" && _id == "${productID}"]{
+    productName,
+    _id,
+    description,
+    price,
+     "imageUrl": image.asset->url
+   }`;
+  const data = await sanityFetch<SanityDocument[]>({
+    query: query,
+  })
+  const products = data.map((product: any) => { return { id: product._id, name: product.productName, imageurl: product.imageUrl, description: product.description, cost: product.price } })
+  return products[0]
+};
+
+
+
+
+
+
+
+
 
 export const getProducts = async () => {
   const db = drizzle(sql);

@@ -7,7 +7,7 @@ import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { DemoSettings } from '@/lib/demoSettings'
 import ProductCarousel from '@/components/ProductCarousel'
-import { getProducts } from '@/lib/products'
+import { getProductsSanity } from '@/lib/products'
 
 import { draftMode } from 'next/headers'
 import { SanityDocument } from "next-sanity"
@@ -19,8 +19,7 @@ export default async function Home() {
     query: HERO_QUERY,
   })
 
-  const products = await getProducts()
-
+  const products = await getProductsSanity()
   const showShippingFlag = false
   return (
     <>

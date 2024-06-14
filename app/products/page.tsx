@@ -1,7 +1,7 @@
 import ShoppingGrid from "@/components/ShoppingGrid";
 import Header from "@/components/Header";
 import Image from "next/image";
-import { getProducts } from "@/lib/products";
+import { getProductsSanity } from "@/lib/products";
 import { Suspense } from "react";
 import Loading from "./loading";
 import TaylorSwiftHero from "@/components/TaylorSwiftHero";
@@ -12,7 +12,7 @@ import { get } from '@vercel/edge-config';
 
 
 async function Products() {
-  const products = await getProducts();
+  const products = await getProductsSanity();
   return <ShoppingGrid products={products} />;
 }
 
