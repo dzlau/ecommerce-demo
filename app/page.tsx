@@ -12,6 +12,7 @@ import { getProducts } from '@/lib/products'
 import { draftMode } from 'next/headers'
 import { SanityDocument } from "next-sanity"
 import { sanityFetch, HERO_QUERY, PRODUCT_QUERY } from "@/lib/sanity"
+import SummerSaleBanner from '@/components/SummerSaleBanner'
 
 export const revalidate = 3600 // revalidate at most every hour
 
@@ -30,8 +31,6 @@ export default async function Home() {
   return (
     <>
       <main className="flex min-h-screen flex-col items-center bg-stone-100">
-
-
         <div className="flex flex-wrap min-w-full bg-[url('/hero.jpg')] bg-cover bg-top bg-no-repeat h-96">
           <div className="flex items-center min-w-full px-10" >
             <div className="mb-8">
@@ -56,7 +55,8 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-10 w-full text-center">
+        <div className="flex flex-col mt-10 w-full text-center space-y-3">
+          <SummerSaleBanner />
           <h1 className="md:text-2xl w-full font-semibold text-gray-800">Our latest products </h1>
           <div className="w- mt-10 justify-center flex">
             <ProductCarousel products={products} />
