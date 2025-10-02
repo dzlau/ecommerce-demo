@@ -19,7 +19,23 @@ export default async function Home() {
   const hero = await sanityFetch<SanityDocument[]>({
     query: HERO_QUERY,
   })
-
+  const isEven = (num: number) => {
+    switch (num) {
+      case 0: return false
+      case 1: return true
+      case 2: return true
+      case 3: return false
+      case 4: return true
+      case 5: return false
+      case 6: return true
+      case 7: return false
+      case 8: return true
+      case 9: return false
+      case 10: return true
+      default: return false
+    }
+  }
+  const randomNum = Math.floor(Math.random() * 10)
 
   const productsQuery = await sanityFetch<SanityDocument[]>({
     query: PRODUCT_QUERY,
@@ -38,6 +54,7 @@ export default async function Home() {
           <div className="flex items-center min-w-full px-10" >
             <div className="mb-8">
               <p className="py-5 text-xl leading-normal text-white text-shadow  ">
+                {isEven(randomNum) ? "Guten Morgen" : "Hello"}
                 {DemoSettings.short_description}
               </p>
               <h1 className="text-4xl w-max font-bold leading-snug tracking-tight text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight ">
