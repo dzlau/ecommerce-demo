@@ -39,10 +39,9 @@ export default async function CanadaPage() {
                         </div>
                     </div>
                 </div>
-                <h1>Welcome to canada</h1>
-
+                {/* 
                 <h1 className="text-3xl font-bold mt-10">Top Prices for your Justin Bieber Concerts</h1>
-                <Image src={'/justin.webp'} alt="justin bieber" width={600} height={300} />
+                <Image src={'/justin.webp'} alt="justin bieber" width={600} height={300} /> */}
             </main >
         </>
     )
