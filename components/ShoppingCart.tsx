@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button"
 import { Suspense, useEffect, useState } from 'react'
 import axios from 'axios'
-import { revalidatePath } from 'next/cache'
 import { useFormStatus } from "react-dom"
 import useSWR from 'swr'
 import { Loader2 } from "lucide-react"
@@ -16,17 +15,17 @@ import { fetchCartEdge } from "@/lib/cart"
 
 
 export default function ShoppingCart() {
-    const [numItems, setNumItems] = useState(1)
-    const [itemsFetched, setItemsFetched] = useState(false)
-    const [cartData, setCartData] = useState<any[]>([])
+    // const [numItems, setNumItems] = useState(1)
+    // const [itemsFetched, setItemsFetched] = useState(false)
+    // const [cartData, setCartData] = useState<any[]>([])
 
-    async function fetchCart() {
-        setItemsFetched(true)
-        const cartData = await fetch('/api/edge/').then(res => res.json())
-        setCartData(cartData.message)
-        setItemsFetched(false)
+    // async function fetchCart() {
+    //     setItemsFetched(true)
+    //     const cartData = await fetch('/api/edge/').then(res => res.json())
+    //     setCartData(cartData.message)
+    //     setItemsFetched(false)
 
-    }
+    // }
 
 
     useEffect(() => {
@@ -35,7 +34,7 @@ export default function ShoppingCart() {
     return (
         <>
             <Popover>
-                <PopoverTrigger onClick={fetchCart}>
+                <PopoverTrigger >
                     <>
                         <div className="relative">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -45,7 +44,7 @@ export default function ShoppingCart() {
                     </>
                 </PopoverTrigger>
                 <PopoverContent>
-                    {itemsFetched ? <>
+                    {/* {itemsFetched ? <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" /></> :
                         <>
                             {
@@ -55,8 +54,8 @@ export default function ShoppingCart() {
                                     </div>
                                 ))
                             }
+                            </>} */}
                             <Button className="mt-4 w-full">Checkout</Button>
-                        </>}
 
 
                 </PopoverContent>

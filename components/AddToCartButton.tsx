@@ -1,10 +1,9 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { useState } from 'react'
+import { useState, useActionState } from 'react';
 import axios from 'axios'
 import { addToCartAction } from "@/lib/actions"
-import { revalidatePath } from 'next/cache'
-import { useFormState, useFormStatus } from "react-dom"
+import { useFormStatus } from "react-dom";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 import AddToCartButtonPending from "./AddToCartButtonPending"
@@ -14,7 +13,7 @@ const initialState = {
 }
 export default function AddToCartButton(product: any) {
   const { pending } = useFormStatus()
-  const [formState, formAction] = useFormState(addToCartAction, initialState);
+  const [formState, formAction] = useActionState(addToCartAction, initialState);
 
 
   return (

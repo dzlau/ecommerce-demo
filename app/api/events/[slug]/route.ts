@@ -7,9 +7,10 @@ export async function GET(request :any) {
     return NextResponse.json({ message: "Hello World" }, { status: 200 });
   }
 // To handle a POST request to /api
-export async function PUT(request :any, {params}:{params:{slug:string}}) {
-    //   revalidate paths
-    revalidatePath(`/events/${params.slug}`)
-    revalidatePath(`/events`)
+export async function PUT(request :any, props:{params: Promise<{slug:string}>}) {
+  const params = await props.params;
+  //   revalidate paths
+  revalidatePath(`/events/${params.slug}`)
+  revalidatePath(`/events`)
   return NextResponse.json({ message: "success" }, { status: 200 });
 }

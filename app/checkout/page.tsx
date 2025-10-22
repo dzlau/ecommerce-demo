@@ -13,16 +13,18 @@ import { sanityFetch, HERO_QUERY, PRODUCT_QUERY } from "@/lib/sanity"
 import Cart from "@/components/Cart";
 import { fetchCartEdge } from "@/lib/cart";
 import StripeElement from "@/components/StripeElement";
+import { Skeleton } from "@/components/ui/skeleton";
 
 async function getCartData() {
     const cartData = await fetchCartEdge()
     return cartData
 }
 export default async function Checkout() {
-    const cartItems = await getCartData()
-    const total = cartItems.reduce((acc, item) => acc + Number(item.cost), 0)
+    // const cartItems = await getCartData()
+    // const total = cartItems.reduce((acc, item) => acc + Number(item.cost), 0)
     return (
         <>
+
             <main className="flex flex-col items-center">
                 <div className="flex  flex-col  w-full justify-between bg-primary  bg-cover bg-top bg-no-repeat ">
                     <h2 className="text-3xl tracking-tight p-6 text-white dark:text-black">
@@ -31,11 +33,15 @@ export default async function Checkout() {
                 </div>
                 <div className="flex flex-col w-full md:flex-row p-6">
                     <div className="basis-1/2">
+        {/* <Suspense fallback={<Skeleton className=" w-[400px] h-[20px] my-5   bg-slate-100" />} >
                         <Cart cartItems={cartItems} total={total} />
+        </Suspense> */}
                     </div>
-                    <div className="basis-1/2">
-                        <StripeElement total={total} />
-                    </div>
+                    {/* <div className="basis-1/2">
+                        <Suspense fallback={<Skeleton className=" w-[400px] h-[20px] my-5   bg-slate-100" />} >
+                            <StripeElement total={total} />
+                        </Suspense>
+                    </div> */}
 
                 </div>
             </main>
