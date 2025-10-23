@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button"
 import { useState } from 'react'
 import axios from 'axios'
-import { revalidatePath } from 'next/cache'
 import { useFormStatus } from "react-dom"
 
 export default function AddProductSubmit() {

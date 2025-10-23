@@ -12,23 +12,16 @@ import { getProducts } from '@/lib/products'
 import { draftMode } from 'next/headers'
 import { SanityDocument } from "next-sanity"
 import { sanityFetch, HERO_QUERY, PRODUCT_QUERY } from "@/lib/sanity"
-
-export const revalidate = 3600 // revalidate at most every hour
-
-export default async function Home() {
-  const hero = await sanityFetch<SanityDocument[]>({
-    query: HERO_QUERY,
-  })
+import { MainHeaderContent } from '@/components/MainHeaderContent'
+import { WelcomeHeader } from '@/components/WelcomeHeader'
 
 
-  const productsQuery = await sanityFetch<SanityDocument[]>({
-    query: PRODUCT_QUERY,
-  })
-  const products = productsQuery.map((product: any) => { return { id: product._id, name: product.productName, imageurl: product.imageUrl, description: product.description, cost: product.price } })
+export default function Home() {
 
   const showShippingFlag = false
   return (
     <>
+    
       <Header />
 
       <main className="flex min-h-screen flex-col items-center bg-stone-100">
@@ -43,11 +36,9 @@ export default async function Home() {
               <h1 className="text-4xl w-max font-bold leading-snug tracking-tight text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight ">
                 {DemoSettings.name}
               </h1>
-              <Suspense fallback={<Skeleton className=" w-[400px] h-[20px] my-5   bg-slate-100" />} >
                 <p className="py-5 text-xl leading-normal text-white lg:text-xl xl:text-2xl ">
-                  {hero[0].value}
+                  <MainHeaderContent />
                 </p>
-              </Suspense>
               <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row justify-start">
                 <Link
                   href="/products"
@@ -58,10 +49,13 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-10 w-full text-center">
+        <div className="flex flex-col mt-10 w-full text-center items-center justify-center ">
+          <Suspense fallback={<Skeleton className=" w-80 h-10 my-5 bg-gray-700" />} >
+          <WelcomeHeader/>
+          </Suspense>
           <h1 className="md:text-2xl w-full font-semibold text-gray-800">Our latest products </h1>
           <div className="w- mt-10 justify-center flex">
-            <ProductCarousel products={products} />
+            <ProductCarousel />
           </div>
         </div>
       </main >

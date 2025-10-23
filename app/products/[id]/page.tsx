@@ -12,7 +12,8 @@ export default async function ProductPage(id: any) {
     query: PRODUCT_QUERY,
   })
   const products = productsQuery.map((product: any) => { return { id: product._id, name: product.productName, imageurl: product.imageUrl, description: product.description, cost: product.price } })
-  const product = products.find((product: Product) => product.id === id.params.id)
+  const product = products.find((product: Product) => product.id ===
+  id.params.id)
 
   return (
     <>
@@ -27,7 +28,7 @@ export default async function ProductPage(id: any) {
             <p className="text-2xl">{product?.name}</p>
             <p className="text-1xl mt-3 mb-3">{product?.description}</p>
             <p className="text-4xl mt-6 mb-3 text-left text-slate-600">${product?.cost}</p>
-            <AddToCartButton product={product} />
+            {/* <AddToCartButton product={product} /> */}
           </div>
         </div>
 

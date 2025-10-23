@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from '@/components/ui/label'
 import { Button } from "@/components/ui/button"
 import { createProductServerAction } from '@/lib/actions'
-import { useFormStatus } from 'react-dom'
 import AddProductSubmit from '@/components/AddProductSubmit'
 import { redirect } from 'next/navigation'
 

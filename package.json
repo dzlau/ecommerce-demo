@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx lib/db/migrate.ts",
     "db:drop": "drizzle-kit drop",
@@ -48,15 +48,16 @@
     "mongodb": "^6.3.0",
     "mongodb-client-encryption": "^6.0.0",
     "nanoid": "^5.0.7",
-    "next": "^14.2.3",
+    "next": "16.0.0",
     "next-sanity": "^9.3.10",
     "postgres": "^3.4.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "react-hook-form": "^7.49.3",
     "react-markdown": "^9.0.1",
     "react-query": "^3.39.3",
     "stripe": "^16.2.0",
+    "styled-jsx": "^5.1.7",
     "swr": "^2.2.4",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
@@ -66,17 +67,23 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
     "autoprefixer": "^10.0.1",
     "dotenv": "^16.4.5",
     "drizzle-kit": "^0.22.8",
-    "eslint": "^8",
-    "eslint-config-next": "^14.1.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "tsx": "^4.15.7",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631"
+  "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.2.2",
+      "@types/react-dom": "19.2.2"
+    }
+  }
 }
