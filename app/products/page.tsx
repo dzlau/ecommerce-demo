@@ -41,7 +41,7 @@ export default async function ListEvent() {
 
         {/* <TaylorSwiftHero/> */}
 
-        <div className=" px-4 max-w-screen-lg  mt-6">
+        <div className=" px-4 max-w-(--breakpoint-lg)  mt-6">
           <Products />
         </div>
       </main>
