@@ -5,7 +5,7 @@ import { getProducts } from "@/lib/products";
 import { Suspense } from "react";
 import Loading from "./loading";
 import TaylorSwiftHero from "@/components/TaylorSwiftHero";
-import { unstable_flag as flag } from '@vercel/flags/next';
+// import { unstable_flag as flag } from '@vercel/flags/next';
 import { FlagValues } from '@vercel/flags/react';
 import { get } from '@vercel/edge-config';
 import { freeShippingFlag } from '@/app/flags';

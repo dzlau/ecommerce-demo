@@ -30,7 +30,7 @@ export default function ChatPage() {
                                 </div>
                             </div>
                         </div>
-                        <Chat />
+                        {/* <Chat /> */}
                     </div>
                 </div>
             </div>

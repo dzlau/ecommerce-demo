@@ -19,35 +19,35 @@ import { useChat } from '@ai-sdk/react';
 import { Response } from '@/components/ai-elements/response';
 
 export default function HelpPage() {
-    const [text, setText] = useState<string>('');
+    // const [text, setText] = useState<string>('');
 
-    const { messages, sendMessage, status } = useChat()
+    // const { messages, sendMessage, status } = useChat()
 
-    const handleSubmit = (message: PromptInputMessage) => {
-        const hasText = Boolean(message.text);
-        const hasAttachments = Boolean(message.files?.length);
-        const [useWebSearch, setUseWebSearch] = useState<boolean>(false);
-        if (!(hasText || hasAttachments)) {
-            return;
-        }
+    // const handleSubmit = (message: PromptInputMessage) => {
+    //     const hasText = Boolean(message.text);
+    //     const hasAttachments = Boolean(message.files?.length);
+    //     const [useWebSearch, setUseWebSearch] = useState<boolean>(false);
+    //     if (!(hasText || hasAttachments)) {
+    //         return;
+    //     }
 
-        sendMessage(
-            {
-                text: message.text || 'Sent with attachments',
-                files: message.files
-            },
-            {
-                body: {
-                    webSearch: useWebSearch,
-                },
-            },
-        );
-        setText('');
-    };
+    //     sendMessage(
+    //         {
+    //             text: message.text || 'Sent with attachments',
+    //             files: message.files
+    //         },
+    //         {
+    //             body: {
+    //                 webSearch: useWebSearch,
+    //             },
+    //         },
+    //     );
+    //     setText('');
+    // };
 
     return (
         <>
-            <Header />
+            {/* <Header />
             <div className="max-w-4xl mx-auto p-6 relative size-full rounded-lg border h-[600px]">
                 <div className="flex flex-col h-full">
                     <Conversation>
@@ -98,7 +98,7 @@ export default function HelpPage() {
                         />
                     </PromptInput>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

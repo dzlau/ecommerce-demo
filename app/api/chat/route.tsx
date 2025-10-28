@@ -1,14 +1,14 @@
-import { openai } from '@ai-sdk/openai';
-import { StreamingTextResponse, streamText, StreamData, convertToCoreMessages, tool } from 'ai';
-import { z } from 'zod';
-import { createResource } from '@/lib/actions';
-import { findRelevantContent } from '@/lib/ai/embedding';
-import { vectordb } from "@/lib/db";
-// Allow streaming responses up to 30 seconds
-import { resources } from '@/lib/db/schema/resources';
-import { streamUI } from 'ai/rsc';
-import ChatShoppingBlock from '@/components/ChatShoppingBlock'
-import { eq, ne, gt, gte, ConsoleLogWriter } from "drizzle-orm";
+// import { openai } from '@ai-sdk/openai';
+// import { StreamingTextResponse, streamText, StreamData, convertToCoreMessages, tool } from 'ai';
+// import { z } from 'zod';
+// import { createResource } from '@/lib/actions';
+// import { findRelevantContent } from '@/lib/ai/embedding';
+// import { vectordb } from "@/lib/db";
+// // Allow streaming responses up to 30 seconds
+// import { resources } from '@/lib/db/schema/resources';
+// import { streamUI } from 'ai/rsc';
+// import ChatShoppingBlock from '@/components/ChatShoppingBlock'
+// import { eq, ne, gt, gte, ConsoleLogWriter } from "drizzle-orm";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
