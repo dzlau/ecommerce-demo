@@ -20,7 +20,7 @@ export default async function ProductPage(id: any) {
       <Header />
 
       <main className="justify-center flex bg-slate-100 min-h-screen">
-        <div className="max-w-screen-lg mt-5 flex flex-row ">
+        <div className="max-w-(--breakpoint-lg) mt-5 flex flex-row ">
           <div className="w-1/2 h-full p-6 justify-center">
             <Image src={product?.imageurl} alt={product?.name} width={400} height={600} />
           </div>

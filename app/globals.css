@@ -1,7 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
- 
+@import 'tailwindcss';
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -65,26 +63,32 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0,0,0,0.10);
-}
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-.text-shadow-md {
-  text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
-}
+  .text-shadow-md {
+    text-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.12),
+      0 2px 4px rgba(0, 0, 0, 0.08);
+  }
 
-.text-shadow-lg {
-  text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.08);
-}
+  .text-shadow-lg {
+    text-shadow:
+      0 15px 30px rgba(0, 0, 0, 0.11),
+      0 5px 15px rgba(0, 0, 0, 0.08);
+  }
 
-.text-shadow-none {
-  text-shadow: none;
+  .text-shadow-none {
+    text-shadow: none;
+  }
 }
 @layer base {
   * {
-    @apply border-border;
+  
   }
   body {
-    @apply bg-background text-foreground;
+   
   }
 }
