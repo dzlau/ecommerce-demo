@@ -10,14 +10,34 @@
 // import ChatShoppingBlock from '@/components/ChatShoppingBlock'
 // import { eq, ne, gt, gte, ConsoleLogWriter } from "drizzle-orm";
 
-import { convertToModelMessages, generateText, streamText, UIMessage } from 'ai';
+import { convertToModelMessages, generateObject, generateText, streamText, UIMessage } from 'ai';
 import { z } from 'zod';
 import { tool } from 'ai';
 
 
+async function findTrendingProducts() {
+    'use step'
+    const { object } = await generateObject({
+        model: "openai/gpt-4.1",
+        prompt: "Search the web for the top trending fashion trends and return return them as a list of products",
+        system: `Only find the coolest products. Genereate a short description of the product as well`,
+        schema: z.object({
+            products: z.array(z.object({
+                name: z.string(),
+                description: z.string(),
+            })),
+        }),
+
+    });
+    console.log(object);
+    return object;
+}
+
+
+
 async function generateProductIdea(description: string) {
     'use workflow'
-    const 
+    await findTrendingProducts()
     return `The product idea is ${description}`;
 }
 
@@ -27,7 +47,6 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
     const { messages }: { messages: UIMessage[] } = await req.json();
-    console.log('messages', messages);
     const result = streamText({
         tools: {
             generateNewProduct: {
@@ -41,7 +60,8 @@ export async function POST(req: Request) {
 
         },
         model: 'openai/gpt-4.1',
-        system: 'You are a helpful assistant.',
+        system: `You are a helpful assistant. You will be helping the user think of new product ideas based on trending fashion trends. You will use the provided tools to find trending
+        fashion trends and then generate a new product idea based on the trending fashion trends.`,
         messages: convertToModelMessages(messages),
     });
 
