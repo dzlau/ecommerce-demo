@@ -13,33 +13,13 @@
 import { convertToModelMessages, generateObject, generateText, streamText, UIMessage } from 'ai';
 import { z } from 'zod';
 import { tool } from 'ai';
-
-
-async function findTrendingProducts() {
-    'use step'
-    const { object } = await generateObject({
-        model: "openai/gpt-4.1",
-        prompt: "Search the web for the top trending fashion trends and return return them as a list of products",
-        system: `Only find the coolest products. Genereate a short description of the product as well`,
-        schema: z.object({
-            products: z.array(z.object({
-                name: z.string(),
-                description: z.string(),
-            })),
-        }),
-
-    });
-    console.log(object);
-    return object;
-}
+import { generateProductBlog } from '@/workflows/generate-product-blog';
+import { start } from 'workflow/api'
 
 
 
-async function generateProductIdea(description: string) {
-    'use workflow'
-    await findTrendingProducts()
-    return `The product idea is ${description}`;
-}
+
+
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -50,18 +30,19 @@ export async function POST(req: Request) {
     const result = streamText({
         tools: {
             generateNewProduct: {
-                description: 'Generate a new product idea for a new item to sell',
+                description: 'Generate a new product blog post of a new item to sell',
                 inputSchema: z.object({ description: z.string().describe('the description of the product idea') }),
                 execute: async ({ description }: { description: any }) => {
-                    const productIdea = await generateProductIdea(description);
-                    return productIdea;
+                    const productBlog = await start(generateProductBlog, [description]);
                 },
             },
 
         },
         model: 'openai/gpt-4.1',
-        system: `You are a helpful assistant. You will be helping the user think of new product ideas based on trending fashion trends. You will use the provided tools to find trending
-        fashion trends and then generate a new product idea based on the trending fashion trends.`,
+        system: `You are a helpful assistant. You will either be helping the user think of new product ideas based on trending fashion trends and generating a blog post, 
+        or you will be recommending a user a product from the catalog. 
+        If the user is asking to generate a blog post, use tool generateNewProduct and reply to user that you are generating blog post
+        If the user is asking to recommend a product, use tool recommendProduct`,
         messages: convertToModelMessages(messages),
     });
 

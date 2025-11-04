@@ -72,6 +72,7 @@
     "ts-node": "^10.9.2",
     "use-stick-to-bottom": "^1.1.1",
     "vercel": "^48.6.0",
+    "workflow": "4.0.1-beta.7",
     "zod": "^4.1.12"
   },
   "devDependencies": {
