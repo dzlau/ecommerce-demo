@@ -18,10 +18,11 @@ import { WelcomeHeader } from '@/components/WelcomeHeader'
 
 export default function Home() {
 
+
   const showShippingFlag = false
   return (
     <>
-    
+
       <Header />
 
       <main className="flex min-h-screen flex-col items-center bg-stone-100">
@@ -36,9 +37,9 @@ export default function Home() {
               <h1 className="text-4xl w-max font-bold leading-snug tracking-tight text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight ">
                 {DemoSettings.name}
               </h1>
-                <p className="py-5 text-xl leading-normal text-white lg:text-xl xl:text-2xl ">
-                  <MainHeaderContent />
-                </p>
+              <p className="py-5 text-xl leading-normal text-white lg:text-xl xl:text-2xl ">
+                <MainHeaderContent />
+              </p>
               <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row justify-start">
                 <Link
                   href="/products"
@@ -51,7 +52,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col mt-10 w-full text-center items-center justify-center ">
           <Suspense fallback={<Skeleton className=" w-80 h-10 my-5 bg-gray-700" />} >
-          <WelcomeHeader/>
+            <WelcomeHeader />
           </Suspense>
           <h1 className="md:text-2xl w-full font-semibold text-gray-800">Our latest products </h1>
           <div className="w- mt-10 justify-center flex">
