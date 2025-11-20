@@ -10,40 +10,87 @@
 // import ChatShoppingBlock from '@/components/ChatShoppingBlock'
 // import { eq, ne, gt, gte, ConsoleLogWriter } from "drizzle-orm";
 
-import { convertToModelMessages, generateObject, generateText, streamText, UIMessage } from 'ai';
+import { convertToModelMessages, generateObject, generateText, stepCountIs, streamText, UIMessage } from 'ai';
 import { z } from 'zod';
 import { tool } from 'ai';
 import { generateProductBlog } from '@/workflows/generate-product-blog';
 import { start } from 'workflow/api'
+import {
+    experimental_createMCPClient,
+} from '@ai-sdk/mcp';
+import { Experimental_StdioMCPTransport } from '@ai-sdk/mcp/mcp-stdio';
 
 
-
-
-
-
+const MCP_URL = process.env.NODE_ENV === 'development' ? 'https://hono-mcp-server.vercel.app/mcp' : 'https://hono-mcp-server.vercel.app/mcp';
+//check if mcp url is working
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
+const mcpClient = experimental_createMCPClient({
+    transport: { type: 'http', url: MCP_URL },
+});
 
+const resolvedMcpClient = await mcpClient;
+const productTools = (await resolvedMcpClient.tools()) as any;
+
+
+const productToolMCPCall = async (description: string) => {
+    const response = await generateText({
+        model: 'anthropic/claude-sonnet-4.5',
+        tools: {
+            ...productTools,
+        },
+        stopWhen: stepCountIs(5),
+        messages: [
+            {
+                role: 'user',
+                content: [{ type: 'text', text: description }],
+            },
+        ],
+        system: `You are a helpful assistant that will generate a list of recommended products for the following description: ${description}`,
+    });
+    console.log('response');
+    return response
+}
 
 export async function POST(req: Request) {
     const { messages }: { messages: UIMessage[] } = await req.json();
     const result = streamText({
         tools: {
-            generateNewProduct: {
+            generateNewProductBlog: {
                 description: 'Generate a new product blog post of a new item to sell',
                 inputSchema: z.object({ description: z.string().describe('the description of the product idea') }),
                 execute: async ({ description }: { description: any }) => {
                     const productBlog = await start(generateProductBlog, [description]);
                 },
             },
-
+            productToolMCPCall: {
+                description: 'Utilize this MCP client for all product related questions ',
+                inputSchema: z.object({ description: z.string().describe('the description of the product the user is looking for') }),
+                execute: async ({ description }: { description: any }) => {
+                    const products = await productToolMCPCall(description);
+                    if (products.response.body === undefined){
+                        return 'No product recommendations found.';
+                    }
+                    const returnText = (products.response.body as any)?.content[0].text;
+                    return returnText;
+                },
+            }
         },
-        model: 'openai/gpt-4.1',
+        model: 'anthropic/claude-sonnet-4.5',
+        providerOptions: {
+            gateway: {
+                order: ['bedrock', 'anthropic'], // Try Amazon Bedrock first, then Anthropic
+                // If both bedrock and anthopic with sonent 4.5 are not available, use sonnet 4
+                models: ['anthropic/claude-sonnet-4'],
+                // 
+            },
+        },
         system: `You are a helpful assistant. You will either be helping the user think of new product ideas based on trending fashion trends and generating a blog post, 
         or you will be recommending a user a product from the catalog. 
-        If the user is asking to generate a blog post, use tool generateNewProduct and reply to user that you are generating blog post
-        If the user is asking to recommend a product, use tool recommendProduct`,
+        If the user is asking to generate a blog post, use tool generateNewProductBlog and reply to user that you are generating blog post
+        If the user is asking anything product related, use tool productToolMCPCall and respond to user with data from tool call`,
         messages: convertToModelMessages(messages),
+        stopWhen: stepCountIs(10),
     });
 
     return result.toUIMessageStreamResponse();
