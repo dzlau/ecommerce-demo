@@ -57,7 +57,7 @@
     "mongodb": "^6.20.0",
     "mongodb-client-encryption": "^6.5.0",
     "nanoid": "^5.1.6",
-    "next": "16.0.7",
+    "next": "16.0.10",
     "next-sanity": "^11.6.2",
     "postgres": "^3.4.7",
     "react": "19.2.0",
