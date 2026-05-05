@@ -1,15 +1,6 @@
 import ShoppingGrid from "@/components/ShoppingGrid";
 import Header from "@/components/Header";
-import Image from "next/image";
-import { getProducts } from "@/lib/products";
-import { Suspense } from "react";
-import Loading from "./loading";
-import TaylorSwiftHero from "@/components/TaylorSwiftHero";
-// import { unstable_flag as flag } from '@vercel/flags/next';
-import { FlagValues } from '@vercel/flags/react';
-import { get } from '@vercel/edge-config';
-import { freeShippingFlag } from '@/app/flags';
-
+import { shippingFlag } from '@/lib/flags';
 import { SanityDocument } from "next-sanity"
 import { sanityFetch, HERO_QUERY, PRODUCT_QUERY } from "@/lib/sanity"
 
@@ -24,7 +15,8 @@ async function Products() {
 
 export default async function ListEvent() {
 
-  const showShippingFlag = await freeShippingFlag()
+  const showShippingFlag = await shippingFlag()
+  console.log(showShippingFlag)
   return (
     <>
       <Header />
