@@ -16,7 +16,6 @@ async function Products() {
 export default async function ListEvent() {
 
   const showShippingFlag = await shippingFlag()
-  console.log(showShippingFlag)
   return (
     <>
       <Header />
