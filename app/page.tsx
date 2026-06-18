@@ -54,6 +54,11 @@ export default function Home() {
           <Suspense fallback={<Skeleton className=" w-80 h-10 my-5 bg-gray-700" />} >
             <WelcomeHeader />
           </Suspense>
+          <p className="max-w-3xl px-6 text-lg text-gray-600 leading-relaxed mb-8">
+            Discover a curated selection of premium products designed to enhance your lifestyle. 
+            We're committed to bringing you quality, innovation, and exceptional value with every purchase. 
+            Whether you're shopping for yourself or looking for the perfect gift, we've got something special for everyone.
+          </p>
           <h1 className="md:text-2xl w-full font-semibold text-gray-800">Our latest products </h1>
           <div className="w- mt-10 justify-center flex">
             <ProductCarousel />
