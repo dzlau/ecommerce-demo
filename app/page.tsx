@@ -50,6 +50,17 @@ export default function Home() {
             </div>
           </div>
         </div>
+        
+        <div className="max-w-4xl mx-auto px-6 py-12">
+          <p className="text-lg text-gray-700 leading-relaxed text-center">
+            Discover an exceptional shopping experience where quality meets convenience. 
+            We're committed to bringing you carefully curated products that enhance your 
+            lifestyle. With fast shipping, secure checkout, and dedicated customer support, 
+            your satisfaction is our top priority. Explore our collection and find exactly 
+            what you're looking for today.
+          </p>
+        </div>
+
         <div className="flex flex-col mt-10 w-full text-center items-center justify-center ">
           <Suspense fallback={<Skeleton className=" w-80 h-10 my-5 bg-gray-700" />} >
             <WelcomeHeader />
