@@ -50,6 +50,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <p className="text-lg text-gray-700 leading-relaxed text-center">
+            Welcome to our curated collection of premium products. We pride ourselves on offering quality items that combine style, functionality, and value. Each product is carefully selected to ensure it meets our high standards, bringing you the best shopping experience possible. Explore our selection and discover your next favorite item today.
+          </p>
+        </div>
         <div className="flex flex-col mt-10 w-full text-center items-center justify-center ">
           <Suspense fallback={<Skeleton className=" w-80 h-10 my-5 bg-gray-700" />} >
             <WelcomeHeader />
