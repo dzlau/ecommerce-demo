@@ -27,6 +27,12 @@ export default function Home() {
 
       <main className="flex min-h-screen flex-col items-center bg-stone-100">
 
+        <div className="w-full px-10 py-8 bg-white">
+          <p className="text-lg text-gray-700 text-center max-w-4xl mx-auto">
+            Welcome to our e-commerce store! Discover an amazing selection of products curated just for you. 
+            We're committed to providing quality items, exceptional customer service, and a seamless shopping experience.
+          </p>
+        </div>
 
         <div className="flex flex-wrap min-w-full bg-[url('/hero.jpg')] bg-cover bg-top bg-no-repeat h-96">
           <div className="flex items-center min-w-full px-10" >
