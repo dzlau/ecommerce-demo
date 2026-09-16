@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Header from '@/components/Header'
 import heroImg from '@/public/hero.jpg'
 import { getHeroContent } from '@/lib/contentful'
 import { Suspense } from 'react'
@@ -22,9 +21,6 @@ export default function Home() {
   const showShippingFlag = false
   return (
     <>
-
-      <Header />
-
       <main className="flex min-h-screen flex-col items-center bg-stone-100">
 
 
