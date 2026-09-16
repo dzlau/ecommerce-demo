@@ -1,13 +1,10 @@
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import Header from "@/components/Header"
 import Chat from "@/components/Chat"
 export default function ChatPage() {
     return (
         <>
-            <Header />
-
             <div className="flex h-screen w-full flex-col">
 
                 <div className="flex-1 bg-gray-100 dark:bg-gray-900">
@@ -37,4 +34,3 @@ export default function ChatPage() {
         </>
     )
 }
-

@@ -1,5 +1,4 @@
 import ShoppingGrid from "@/components/ShoppingGrid";
-import Header from "@/components/Header";
 import { shippingFlag } from '@/lib/flags';
 import { SanityDocument } from "next-sanity"
 import { sanityFetch, HERO_QUERY, PRODUCT_QUERY } from "@/lib/sanity"
@@ -18,8 +17,6 @@ export default async function ListEvent() {
   const showShippingFlag = await shippingFlag()
   return (
     <>
-      <Header />
-
       <main className="flex min-h-56 flex-col  justify-between bg-stone-100 bg-[url('/concert.jpg')] bg-cover bg-top bg-no-repeat h-10">
         {showShippingFlag ? (<div className="w-full bg-primary z-5 flex justify-center items-center pt-4 bg-green-600">
           <p className="text-white h-14">Free shipping on orders over $100!</p>
